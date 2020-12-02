@@ -7,18 +7,15 @@ with open(sys.argv[1]) as f:
     numbers = [ int(x.strip()) for x in lines ]
 
 done = False
-for i, x in enumerate(numbers):
-    for j, y in enumerate(numbers):
-        if i == j:
-            continue
-        for k, z in enumerate(numbers):
-            if k == i or k == j:
-               continue 
-            if done:
-                break
+for i in range(0, len(numbers)):
+    x = numbers[i]
+    if done: break
+    for j in range(i+1, len(numbers)):
+        y = numbers[j]
+        if done: break
+        for k in range(j+1, len(numbers)):
+            z = numbers[k]
             if x + y + z == 2020:
                 print(x,y,z,x+y+z,x*y*z)
                 done = True
                 break
-    if done:
-        break
