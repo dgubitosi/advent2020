@@ -3,7 +3,9 @@ import sys
 
 rows = 128
 cols = 8
-seats = [[ '.' for x in range(cols)] for y in range(rows)] 
+empty = '.'
+occupied = 'X'
+seats = [[ empty for x in range(cols)] for y in range(rows)]
 
 max = 0
 with open(sys.argv[1]) as f:
@@ -27,12 +29,12 @@ with open(sys.argv[1]) as f:
         seat = r * cols + c
         if seat > max: max = seat
         #print(bp, tuple([r, c]), seat)
-        seats[r][c] = 'X'
+        seats[r][c] = occupied
 
 for r in range(len(seats)):
     s = ''.join(seats[r])
     #print(s)
-    if 'X.X' in s:
-        c = s.find('.')
+    if occupied + empty + occupied in s:
+        c = s.find(empty)
         print(r * cols + c)
         break
