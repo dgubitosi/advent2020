@@ -73,20 +73,25 @@ class Ferry(object):
         # waypoint position
         wx = self.wx + self.x
         wy = self.wy + self.y
+        print('WAYPOINT', wx, wy)
 
-        # angle to waypoint
-        a = math.atan2(wy-self.y, wx-self.x)
-        a = math.degrees(a)
-        angle = a + value
-        if angle < 0:
-            angle += 360
-        
         # distance to the way point
         distance = math.sqrt(((wx-self.x)**2) + ((wy-self.y)**2))
+        print('DISTANCE', distance)
 
+        # angle to waypoint
+        angle = math.atan2(wy-self.y, wx-self.x)
+        angle = math.degrees(angle)
+        print('ANGLE', angle)
+        angle += value
+        print('ANGLE', angle)
+        if angle < 0:
+            print('ANGLE', angle)
+            angle += 360
+        
         # new waypoint position
-        self.wx = int(distance * math.cos(math.radians(angle)))
-        self.wy = int(distance * math.sin(math.radians(angle)))
+        self.wx = round(distance * math.cos(math.radians(angle)))
+        self.wy = round(distance * math.sin(math.radians(angle)))
 
     def forward(self, instruction, value):
         print('FORWARD', instruction, value)
