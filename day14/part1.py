@@ -1,7 +1,7 @@
 
 import sys
 
-mem = dict()
+memory = dict()
 with open(sys.argv[1]) as f:
     mask = None
     for line in f:
@@ -10,17 +10,17 @@ with open(sys.argv[1]) as f:
         if a == 'mask':
             mask = b
         else:
-            m = int(a.split('[')[-1][0:-1])
-            mem.setdefault(m, 0)
-            mem[m] = [ c for c in "{:036b}".format(int(b)) ]
+            location = int(a.split('[')[-1][0:-1])
+            memory.setdefault(location, 0)
+            memory[location] = [ c for c in "{:036b}".format(int(b)) ]
             for index, bit in enumerate(mask):
                 if bit != 'X':
-                    mem[m][index] = bit
+                    memory[location][index] = bit
 
 total = 0
-for m in sorted(mem):
-    binary = "".join(mem[m])
+for location in sorted(memory):
+    binary = "".join(memory[location])
     integer = int(binary, 2)
-    print(m, binary, integer)
+    print(location, binary, integer)
     total += integer
 print(total)
