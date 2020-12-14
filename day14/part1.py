@@ -1,6 +1,5 @@
 
 import sys
-#from bitstring import bitarray
 
 mem = dict()
 with open(sys.argv[1]) as f:
