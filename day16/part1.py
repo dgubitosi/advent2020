@@ -1,6 +1,21 @@
 
 import sys
 
+def validate(ticket):
+
+    errors = 0
+    for t in ticket:
+        valid = False
+        for r in rules:
+            if valid: break
+            #print(rule)
+            for values in rules[r]:
+                #print(t, r)
+                if int(values[0]) <= int(t) <= int(values[-1]): valid = True
+                if valid: break
+        if not valid: errors += int(t)
+    return errors
+
 rules = dict()
 tickets = list()
 my_ticket = list()
@@ -31,7 +46,12 @@ with open(sys.argv[1]) as f:
             nearby = True
             continue
 
+#print(rules)
+#print(my_ticket)
+#print(tickets)
 
-print(rules)
-print(my_ticket)
-print(tickets)
+error_rate = 0
+for t in tickets:
+    error_rate += validate(t)
+print(error_rate)
+
